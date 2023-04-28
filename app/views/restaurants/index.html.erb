@@ -1,0 +1,14 @@
+<div class='container'>
+<p style="color: green"><%= notice %></p>
+
+<h1>Restaurants</h1>
+
+<div id="restaurants">
+  <% @restaurants.each do |restaurant| %>
+    <p><%= restaurant.name %><br>
+      <%= link_to "Detalhes", restaurant_path(restaurant), class: "btn-sm btn-primary"%>
+  <% end %>
+</div>
+
+<%= link_to "Criar restaurante", new_restaurant_path, class: "btn btn-success"%>
+</div>

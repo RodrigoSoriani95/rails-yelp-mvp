@@ -1,0 +1,36 @@
+<div class='container'>
+ <p style="color: green"><%= notice %></p>
+
+
+ <h4><%= @restaurant.name %></h4>
+
+
+ <div>
+  <%= link_to "Edit this restaurant", edit_restaurant_path(@restaurant) %> |
+  <%= link_to "Back to restaurants", restaurants_path %>
+  <br>
+ <br><%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+ </div>
+
+ <br>
+ <h2>Reviews:</h2>
+
+ <ul>
+  <% @restaurant.reviews.each do |review| %>
+    <li>
+      <%= review.content %>
+      <%= link_to "remove", review_path(review), data: { turbo_method: :delete }, class: 'btn-sm btn-danger' %>
+    </li>
+  <% end %>
+ </ul>
+
+ <h2>Comente sobre o restaurante!</h2>
+
+  <%= simple_form_for([@restaurant, @review]) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= f.input :content %>
+    <%= f.input :rating %>
+    <%= f.submit "Comentar!", class: 'btn btn-primary' %>
+  <% end %>
+</div>
